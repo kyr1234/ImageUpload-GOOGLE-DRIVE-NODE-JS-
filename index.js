@@ -46,7 +46,7 @@ app.listen(port, () => {
 })
 
 app.get('/', (req, res) => {
-  res.send('Data Added Successfully')
+  res.send('Data Added Sdsfuccessfully')
 })
 
 
