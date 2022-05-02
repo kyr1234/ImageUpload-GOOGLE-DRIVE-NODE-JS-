@@ -1,8 +1,8 @@
 /* const GOOGLE_API_FOLDER_ID = '11sBL2sL1bmcDZ_fkzRnKhc_03t30EU6X'
 const fs = require('fs')
 const { google } = require('googleapis') */
-const multer=require('multer')
-const path=require('path')
+const multer = require('multer')
+const path = require('path')
 /* let value; */
 let express = require('express')
 const app = express()
@@ -17,21 +17,20 @@ app.use(
     origin: '*',
     methods: ['GET', 'POST'],
     credentials: true,
-}),
+  }),
 )
-const  storage=multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,"Images")
-
-    },
-    filename:(req,file,cb)=>{
-/* value=Date.now()+path.extname(file.originalname) */
-        console.log(file)
-        cb(null,Date.now()+path.extname(file.originalname))
-    }
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'Images')
+  },
+  filename: (req, file, cb) => {
+    /* value=Date.now()+path.extname(file.originalname) */
+    console.log(file)
+    cb(null, Date.now() + path.extname(file.originalname))
+  },
 })
 
-const upload =multer({storage:storage});
+const upload = multer({ storage: storage })
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -45,10 +44,13 @@ app.listen(port, () => {
   console.log('deployed')
 })
 
+app.post('/upload', upload.single('name'), (req, res) => {
+  res.send('UPLOADED SUCCESS')
+})
+
 app.get('/', (req, res) => {
   res.send('Data Added Sdsfuccessfully')
 })
-
 
 /* const uploadFile=async(file) =>{
     try{
@@ -83,11 +85,6 @@ app.get('/', (req, res) => {
         console.log('Upload file error', err)
     }
 } */
-
-
-
-
-
 
 /* 
 uploadFile(value).then(data => {
