@@ -45,7 +45,7 @@ app.listen(port, () => {
 })
 
 app.post('/upload', upload.single('image'),uploadFile(value) ,(req, res) => {
-  res.send('UPLOADED SUCCESS')
+  res.send('UPLOADED SUCCESS',req.photoid)
 })
 
 app.get('/', (req, res) => {
