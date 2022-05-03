@@ -39,18 +39,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-const port = process.env.PORT || 3000
-app.listen(port, () => {
-  console.log('deployed')
-})
-
-app.post('/upload', upload.single('image'),uploadFile(value) ,(req, res) => {
-  res.send('UPLOADED SUCCESS',req.photoid)
-})
-
-app.get('/', (req, res) => {
-  res.send('Data Added Sdsfuccessfully')
-})
 
 const uploadFile=async(req,res,file,next) =>{
     try{
@@ -62,7 +50,7 @@ const uploadFile=async(req,res,file,next) =>{
         const driveService = google.drive({
             version: 'v3',
             auth
-        })
+          })
 
         const fileMetaData = {
             'name': 'snowplace.jpg',
@@ -86,6 +74,18 @@ next()
     }
 } 
 
+const port = process.env.PORT || 3000
+
+app.post('/upload', upload.single('image'),uploadFile(value) ,(req, res) => {
+  res.send('UPLOADED SUCCESS',req.photoid)
+})
+
+app.get('/', (req, res) => {
+  res.send('Data Added Sdsfuccessfully')
+})
+app.listen(port, () => {
+  console.log('deployed')
+})
 /* 
 uploadFile(value).then(data => {
     console.log(data)
