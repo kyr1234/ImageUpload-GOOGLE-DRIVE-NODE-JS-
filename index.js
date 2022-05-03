@@ -44,7 +44,7 @@ app.listen(port, () => {
   console.log('deployed')
 })
 
-app.post('/upload', upload.single('name'), (req, res) => {
+app.post('/upload', upload.single('image'), (req, res) => {
   res.send('UPLOADED SUCCESS')
 })
 
