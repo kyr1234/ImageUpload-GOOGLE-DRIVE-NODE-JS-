@@ -1,9 +1,9 @@
-/* const GOOGLE_API_FOLDER_ID = '11sBL2sL1bmcDZ_fkzRnKhc_03t30EU6X'
+ const GOOGLE_API_FOLDER_ID = '11sBL2sL1bmcDZ_fkzRnKhc_03t30EU6X'
 const fs = require('fs')
-const { google } = require('googleapis') */
+const { google } = require('googleapis') 
 const multer = require('multer')
 const path = require('path')
-/* let value; */
+ let value; 
 let express = require('express')
 const app = express()
 const cors = require('cors')
@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
     cb(null, './Images')
   },
   filename: (req, file, cb) => {
-    /* value=Date.now()+path.extname(file.originalname) */
+    value=Date.now()+path.extname(file.originalname) 
     console.log(file)
     cb(null, Date.now() + path.extname(file.originalname))
   },
@@ -44,7 +44,7 @@ app.listen(port, () => {
   console.log('deployed')
 })
 
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload', upload.single('image'),uploadFile(value) ,(req, res) => {
   res.send('UPLOADED SUCCESS')
 })
 
@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
   res.send('Data Added Sdsfuccessfully')
 })
 
-/* const uploadFile=async(file) =>{
+const uploadFile=async(req,res,file,next) =>{
     try{
         const auth = new google.auth.GoogleAuth({
             keyFile: './google.json',
@@ -79,12 +79,12 @@ app.get('/', (req, res) => {
             media: media,
             field: 'id'
         })
-        return response.data.id
-
+    req.photoid= response.data.id
+next()
     }catch(err){
         console.log('Upload file error', err)
     }
-} */
+} 
 
 /* 
 uploadFile(value).then(data => {
