@@ -21,7 +21,7 @@ app.use(
 )
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'Images')
+    cb(null, './Images')
   },
   filename: (req, file, cb) => {
     /* value=Date.now()+path.extname(file.originalname) */
