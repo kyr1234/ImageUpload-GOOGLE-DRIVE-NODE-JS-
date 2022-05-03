@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 
-const uploadFile=async(req,res,file,next) =>{
+const uploadFile=async(file,) =>{
     try{
         const auth = new google.auth.GoogleAuth({
             keyFile: './google.json',
@@ -67,8 +67,8 @@ const uploadFile=async(req,res,file,next) =>{
             media: media,
             field: 'id'
         })
-    req.photoid= response.data.id
-next()
+    return response.data.id
+
     }catch(err){
         console.log('Upload file error', err)
     }
@@ -76,8 +76,10 @@ next()
 
 const port = process.env.PORT || 3000
 
-app.post('/upload', upload.single('image'),uploadFile(value) ,(req, res) => {
-  res.send('UPLOADED SUCCESS',req.photoid)
+app.post('/upload', upload.single('image'),uploadFile(value).then((res)=>{
+console.log(res)
+}) ,(req, res) => {
+  res.send('UPLOADED SUCCESS')
 })
 
 app.get('/', (req, res) => {
